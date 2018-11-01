@@ -1,8 +1,6 @@
 ## Directorties
-node_modules/
 coverage/
-documentation/
-dist/
+node_modules/
 
 ## Files
 npm-debug.log
