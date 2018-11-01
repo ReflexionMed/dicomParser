@@ -55,20 +55,20 @@ export default function parseDicom (byteArray, options) {
       }
       // if running on node, use the zlib library to inflate
       // http://stackoverflow.com/questions/4224606/how-to-check-whether-a-script-is-running-under-node-js
-      else if (typeof module !== 'undefined' && this.module !== module) {
-        // inflate it
-        const zlib = require('zlib');
-        const deflatedBuffer = sharedCopy(byteArray, position, byteArray.length - position);
-        const inflatedBuffer = zlib.inflateRawSync(deflatedBuffer);
+//       else if (typeof module !== 'undefined' && this.module !== module) {
+//         // inflate it
+//         const zlib = require('zlib');
+//         const deflatedBuffer = sharedCopy(byteArray, position, byteArray.length - position);
+//         const inflatedBuffer = zlib.inflateRawSync(deflatedBuffer);
 
-        // create a single byte array with the full header bytes and the inflated bytes
-        const fullByteArrayBuffer = alloc(byteArray, inflatedBuffer.length + position);
+//         // create a single byte array with the full header bytes and the inflated bytes
+//         const fullByteArrayBuffer = alloc(byteArray, inflatedBuffer.length + position);
 
-        byteArray.copy(fullByteArrayBuffer, 0, 0, position);
-        inflatedBuffer.copy(fullByteArrayBuffer, position);
+//         byteArray.copy(fullByteArrayBuffer, 0, 0, position);
+//         inflatedBuffer.copy(fullByteArrayBuffer, position);
 
-        return new ByteStream(littleEndianByteArrayParser, fullByteArrayBuffer, 0);
-      }
+//         return new ByteStream(littleEndianByteArrayParser, fullByteArrayBuffer, 0);
+//       }
       // if pako is defined - use it.  This is the web browser path
       // https://github.com/nodeca/pako
       else if (typeof pako !== 'undefined') {
